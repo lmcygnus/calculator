@@ -75,3 +75,26 @@ dot.addEventListener("click", () => {
     if(display2.textContent.includes(".")) return;
     display2.textContent += dot.textContent
 })
+
+window.addEventListener('keydown', (e, op) => {
+    if (e.key >= 0 && e.key <= 9) {
+        display2.textContent += e.key
+    }
+    if (e.key === '.') {
+        if(display2.textContent.includes(".")) return;
+        display2.textContent += dot.textContent
+    }
+    if (e.key === '=' || e.key === 'Enter') {
+        if(operator === null) return
+        num2 = Number(display2.textContent)
+        display1.textContent += num2
+        result = roundResult(operate(num1, operator, num2));
+        if(operator === "/" && Number(display2.textContent) === 0){result = "∞";}
+        display2.textContent = result
+        display1.textContent = `${num1} ${operator} ${num2}`
+        operator = ""
+    }
+    if (e.key === 'Backspace') {
+        display2.textContent = display2.textContent.toString().slice(0, -1)
+     }
+})
